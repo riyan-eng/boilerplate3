@@ -1,5 +1,7 @@
 package service
 
+import "github.com/riyan-eng/boilerplate3/internal/repository"
+
 type TaskService interface {
 	ListTask()
 	CreateTask()
@@ -8,10 +10,14 @@ type TaskService interface {
 	UpdateTask()
 }
 
-type taskService struct{}
+type taskService struct {
+	dao repository.DAO
+}
 
-func NewTaskService() TaskService {
-	return &taskService{}
+func NewTaskService(dao repository.DAO) TaskService {
+	return &taskService{
+		dao: dao,
+	}
 }
 
 func (t *taskService) ListTask() {

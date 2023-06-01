@@ -1,7 +1,13 @@
 package app
 
-type ServiceServer struct{}
+import "github.com/riyan-eng/boilerplate3/internal/service"
 
-func NewService() *ServiceServer {
-    return &ServiceServer{}
+type ServiceServer struct {
+	taskService service.TaskService
+}
+
+func NewService(taskService service.TaskService) *ServiceServer {
+	return &ServiceServer{
+		taskService: taskService,
+	}
 }

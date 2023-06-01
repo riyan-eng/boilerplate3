@@ -10,7 +10,8 @@ type dao struct{}
 
 var DB *sql.DB
 
-func NewDAO() DAO {
+func NewDAO(db *sql.DB) DAO {
+	DB = db
 	return &dao{}
 }
 
