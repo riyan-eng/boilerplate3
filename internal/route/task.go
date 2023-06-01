@@ -9,17 +9,9 @@ import (
 func TaskRoute(a *fiber.App, taskService service.TaskService) {
 	handler := app.NewService(taskService)
 	route := a.Group("/task")
-	route.Get("/", handler.CreateTask)
-	route.Get("/:id", func(c *fiber.Ctx) error {
-		return c.SendString("ini detail")
-	})
-	route.Post("/", func(c *fiber.Ctx) error {
-		return c.SendString("ini create")
-	})
-	route.Put("/", func(c *fiber.Ctx) error {
-		return c.SendString("ini update")
-	})
-	route.Delete("/", func(c *fiber.Ctx) error {
-		return c.SendString("ini delete")
-	})
+	route.Get("/", handler.ListTask)
+	route.Post("/", handler.CreateTask)
+	route.Get("/:id", handler.DetailTask)
+	route.Patch("/:id", handler.UpdateTask)
+	route.Delete("/:id", handler.DeleteTask)
 }
