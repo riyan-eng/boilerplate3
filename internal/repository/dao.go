@@ -1,6 +1,10 @@
 package repository
 
-import "database/sql"
+import (
+	"database/sql"
+
+	_ "github.com/lib/pq"
+)
 
 type DAO interface {
 	NewTaskQuery() TaskQuery
@@ -16,7 +20,7 @@ func NewDAO(db *sql.DB) DAO {
 }
 
 func NewDB() (*sql.DB, error) {
-	dsn := ""
+	dsn := "host=localhost user=postgres password=riyan dbname=boilerplate3_development port=5432 sslmode=disable TimeZone=Asia/Jakarta"
 	var err error
 	DB, err = sql.Open("postgres", dsn)
 	if err != nil {

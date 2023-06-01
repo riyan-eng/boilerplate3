@@ -7,13 +7,13 @@ import (
 	"github.com/riyan-eng/boilerplate3/internal/repository"
 	"github.com/riyan-eng/boilerplate3/internal/route"
 	"github.com/riyan-eng/boilerplate3/internal/service"
-	// "github.com/riyan-eng/boilerplate3/internal/app"
 )
 
 func main() {
 	// database
 	db, err := repository.NewDB()
 	if err != nil {
+		log.Printf("cannot connect database: %v", err)
 		return
 	}
 	err = db.Ping()
