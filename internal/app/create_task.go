@@ -1,5 +1,7 @@
 package app
 
-func (s *ServiceServer) CreateTask() {
+import "github.com/gofiber/fiber/v2"
 
+func (s *ServiceServer) CreateTask(c *fiber.Ctx) error {
+	return c.SendString("create task")
 }
