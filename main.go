@@ -2,14 +2,25 @@ package main
 
 import (
 	"log"
+	"runtime"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/swagger"
 	"github.com/riyan-eng/boilerplate3/internal/repository"
 	"github.com/riyan-eng/boilerplate3/internal/route"
 	"github.com/riyan-eng/boilerplate3/internal/service"
 	"github.com/riyan-eng/boilerplate3/pkg/docs"
 )
+
+func init() {
+	numCPU := runtime.NumCPU()
+	if numCPU <= 1 {
+		runtime.GOMAXPROCS(1)
+	} else {
+		runtime.GOMAXPROCS(numCPU / 2)
+	}
+}
 
 func main() {
 	// database
@@ -27,15 +38,17 @@ func main() {
 	dao := repository.NewDAO(db)
 	taskService := service.NewTaskService(dao)
 
-	// docs
+	// swagger
 	docs.SwaggerInfo.Title = "Boilerplate 3"
-	// docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Description = "This is a sample swagger for Fiber"
 	docs.SwaggerInfo.Host = "localhost:3000"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
-	//
+	// fiber
 	fiberApp := fiber.New()
+	fiberApp.Use(cors.New(cors.Config{
+		AllowOrigins: "http://127.0.0.1:3000, https://gofiber.net",
+		AllowHeaders: "Origin, Content-Type, Accept",
+	}))
 	fiberApp.Get("/docs/*", swagger.New(swagger.Config{
 		Title: "BP3",
 	}))

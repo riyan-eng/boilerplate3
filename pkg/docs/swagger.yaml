@@ -1,4 +1,47 @@
 info:
   contact: {}
-paths: {}
+paths:
+  /task:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: desc
+        description: desc/asc default(desc)
+        in: query
+        name: order
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      - description: JU -> untuk jurnal umum
+        in: query
+        name: scope
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: per page
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: List akun
+      tags:
+      - Akun
+    post:
+      consumes:
+      - application/json
+      description: create string by ID
+      operationId: create-string-by-int
+      produces:
+      - application/json
+      responses: {}
+      summary: Add a new pet to the store
 swagger: "2.0"

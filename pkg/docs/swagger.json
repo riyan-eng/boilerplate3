@@ -3,5 +3,71 @@
     "info": {
         "contact": {}
     },
-    "paths": {}
+    "paths": {
+        "/task": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Akun"
+                ],
+                "summary": "List akun",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "desc",
+                        "description": "desc/asc default(desc)",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "search",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "JU -\u003e untuk jurnal umum",
+                        "name": "scope",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "per page",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "description": "create string by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Add a new pet to the store",
+                "operationId": "create-string-by-int",
+                "responses": {}
+            }
+        }
+    }
 }

@@ -1,11 +1,11 @@
 dev:
-	cd cmd; go run main.go
+	go run main.go
 
 docs:
-	swag init -d ./cmd -o ./pkg/docs
+	swag init -o ./pkg/docs
 
 build:
-	cd cmd; go build -o ../build/app
+	go build -o ./build/app
 
 start:
 	cd build; ./app
