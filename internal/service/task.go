@@ -1,10 +1,15 @@
 package service
 
-import "github.com/riyan-eng/boilerplate3/internal/repository"
+import (
+	"github.com/riyan-eng/boilerplate3/internal/dto"
+	"github.com/riyan-eng/boilerplate3/internal/repository"
+	"github.com/riyan-eng/boilerplate3/internal/serrepconnector"
+	srv "github.com/riyan-eng/boilerplate3/pkg"
+)
 
 type TaskService interface {
 	ListTask()
-	CreateTask()
+	CreateTask(dto.TaskCreateReq) dto.TaskCreateRes
 	DeleteTask()
 	DetailTask()
 	UpdateTask()
@@ -23,7 +28,18 @@ func NewTaskService(dao repository.DAO) TaskService {
 func (t *taskService) ListTask() {
 }
 
-func (t *taskService) CreateTask() {
+func (t *taskService) CreateTask(req dto.TaskCreateReq) (res dto.TaskCreateRes) {
+	t.dao.NewTaskQuery().CreateTask(serrepconnector.CreateTaskReq{
+		ID:     req.ID,
+		Name:   req.Name,
+		Detail: req.Detail,
+	})
+	res.Data = srv.CreateTaskRes{
+		ID:     req.ID,
+		Name:   req.Name,
+		Detail: req.Detail,
+	}
+	return
 }
 
 func (t *taskService) DeleteTask() {

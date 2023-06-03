@@ -30,5 +30,7 @@ func NewDB() (*sql.DB, error) {
 }
 
 func (d *dao) NewTaskQuery() TaskQuery {
-	return &taskQuery{}
+	return &taskQuery{
+		db: DB,
+	}
 }

@@ -1,3 +1,11 @@
+definitions:
+  pkg.CreateTask:
+    properties:
+      detail:
+        type: string
+      name:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
@@ -40,6 +48,13 @@ paths:
       - application/json
       description: create string by ID
       operationId: create-string-by-int
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.CreateTask'
       produces:
       - application/json
       responses: {}

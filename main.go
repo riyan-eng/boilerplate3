@@ -6,6 +6,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/monitor"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
 	"github.com/riyan-eng/boilerplate3/config"
 	"github.com/riyan-eng/boilerplate3/internal/repository"
@@ -47,6 +49,8 @@ func main() {
 	// fiber
 	fiberApp := fiber.New(config.NewFiberConfig())
 	fiberApp.Use(cors.New(config.NewCorsConfig()))
+	fiberApp.Use(recover.New())
+	fiberApp.Get("/metrics", monitor.New())
 	fiberApp.Get("/docs/*", swagger.New(config.NewSwaggerConfig()))
 	route.NewRoute(fiberApp, taskService)
 	fiberApp.Listen(":3000")

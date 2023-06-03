@@ -78,7 +78,31 @@ const docTemplate = `{
                 ],
                 "summary": "Add a new pet to the store",
                 "operationId": "create-string-by-int",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pkg.CreateTask"
+                        }
+                    }
+                ],
                 "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "pkg.CreateTask": {
+            "type": "object",
+            "properties": {
+                "detail": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
             }
         }
     }
