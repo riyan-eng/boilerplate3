@@ -9,7 +9,7 @@ import (
 )
 
 type TaskQuery interface {
-	ListTask()
+	ListTask(serrepconnector.ListTaskReq) *sql.Rows
 	CreateTask(serrepconnector.CreateTaskReq)
 	DeleteTask()
 	DetailTask()
@@ -20,13 +20,19 @@ type taskQuery struct {
 	db *sql.DB
 }
 
-func (u *taskQuery) ListTask() {
+func (u *taskQuery) ListTask(r serrepconnector.ListTaskReq) *sql.Rows {
+	query := fmt.Sprintf(`select id, name, detail from public.tasks 
+		where lower(name) like '%%%v%%' order by created_at %v limit %v offset %v`,
+		r.Search, r.Order, r.Limit, r.Offset)
+	rows, err := u.db.Query(query)
+	util.PanicIfNeeded(err)
+	return rows
 }
 
-func (u *taskQuery) CreateTask(req serrepconnector.CreateTaskReq) {
+func (u *taskQuery) CreateTask(r serrepconnector.CreateTaskReq) {
 	query := fmt.Sprintf(`
 		insert into public.tasks (id, name, detail) values ('%v', '%v', '%v')
-	`, req.ID, req.Name, req.Detail)
+	`, r.ID, r.Name, r.Detail)
 	_, err := u.db.Exec(query)
 	util.PanicIfNeeded(err)
 }

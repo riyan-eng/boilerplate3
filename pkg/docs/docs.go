@@ -48,12 +48,6 @@ const docTemplate = `{
                         "in": "query"
                     },
                     {
-                        "type": "string",
-                        "description": "JU -\u003e untuk jurnal umum",
-                        "name": "scope",
-                        "in": "query"
-                    },
-                    {
                         "type": "integer",
                         "description": "page",
                         "name": "page",
@@ -61,8 +55,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "integer",
-                        "description": "per page",
-                        "name": "per_page",
+                        "description": "limit",
+                        "name": "limit",
                         "in": "query"
                     }
                 ],
@@ -85,7 +79,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pkg.CreateTask"
+                            "$ref": "#/definitions/pkg.CreateTaskReq"
                         }
                     }
                 ],
@@ -94,7 +88,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "pkg.CreateTask": {
+        "pkg.CreateTaskReq": {
             "type": "object",
             "properties": {
                 "detail": {

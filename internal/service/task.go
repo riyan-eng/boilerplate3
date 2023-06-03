@@ -1,14 +1,16 @@
 package service
 
 import (
+	"github.com/blockloop/scan/v2"
 	"github.com/riyan-eng/boilerplate3/internal/dto"
 	"github.com/riyan-eng/boilerplate3/internal/repository"
 	"github.com/riyan-eng/boilerplate3/internal/serrepconnector"
 	srv "github.com/riyan-eng/boilerplate3/pkg"
+	"github.com/riyan-eng/boilerplate3/pkg/util"
 )
 
 type TaskService interface {
-	ListTask()
+	ListTask(dto.TaskListReq) dto.TaskListRes
 	CreateTask(dto.TaskCreateReq) dto.TaskCreateRes
 	DeleteTask()
 	DetailTask()
@@ -25,7 +27,22 @@ func NewTaskService(dao repository.DAO) TaskService {
 	}
 }
 
-func (t *taskService) ListTask() {
+func (t *taskService) ListTask(req dto.TaskListReq) (res dto.TaskListRes) {
+	pageMeta := util.PageMeta(req.Page, req.Limit)
+	sqlrows := t.dao.NewTaskQuery().ListTask(serrepconnector.ListTaskReq{
+		Search: req.Search,
+		Limit:  pageMeta.Limit,
+		Offset: pageMeta.Offset,
+		Order:  req.Order,
+	})
+	err := scan.Rows(&res.Items, sqlrows)
+	util.PanicIfNeeded(err)
+	res.Page = pageMeta.Page
+	res.Limit = pageMeta.Page
+	if res.Items[0].Total > 1 {
+		res.Total = res.Items[0].Total
+	}
+	return
 }
 
 func (t *taskService) CreateTask(req dto.TaskCreateReq) (res dto.TaskCreateRes) {

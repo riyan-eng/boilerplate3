@@ -8,3 +8,12 @@ type CreateTaskReq struct {
 }
 
 type CreateTaskRes struct{}
+
+type ListTaskReq struct {
+	Search string
+	Limit  uint32
+	Offset uint32
+	Order  string
+}
+
+type ListTaskRes struct{}

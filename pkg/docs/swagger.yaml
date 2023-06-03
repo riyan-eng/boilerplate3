@@ -1,5 +1,5 @@
 definitions:
-  pkg.CreateTask:
+  pkg.CreateTaskReq:
     properties:
       detail:
         type: string
@@ -23,17 +23,13 @@ paths:
         in: query
         name: search
         type: string
-      - description: JU -> untuk jurnal umum
-        in: query
-        name: scope
-        type: string
       - description: page
         in: query
         name: page
         type: integer
-      - description: per page
+      - description: limit
         in: query
-        name: per_page
+        name: limit
         type: integer
       produces:
       - application/json
@@ -54,7 +50,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/pkg.CreateTask'
+          $ref: '#/definitions/pkg.CreateTaskReq'
       produces:
       - application/json
       responses: {}

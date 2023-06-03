@@ -7,9 +7,9 @@ type Response struct {
 }
 
 type Meta struct {
-	Page    int `json:"page"`
-	PerPage int `json:"per_page"`
-	Total   int `json:"total"`
+	Page  uint32 `json:"page"`
+	Limit uint32 `json:"limit"`
+	Total uint32 `json:"total"`
 }
 
 const (

@@ -3,6 +3,7 @@ module github.com/riyan-eng/boilerplate3
 go 1.20
 
 require (
+	github.com/blockloop/scan/v2 v2.0.1
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 	github.com/gofiber/fiber/v2 v2.46.0
 	github.com/gofiber/swagger v0.1.12
@@ -36,6 +37,7 @@ require (
 	github.com/valyala/fasthttp v1.47.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	golang.org/x/sys v0.8.0 // indirect
+	golang.org/x/text v0.8.0 // indirect
 	golang.org/x/tools v0.9.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

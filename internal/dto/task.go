@@ -1,6 +1,9 @@
 package dto
 
-import srv "github.com/riyan-eng/boilerplate3/pkg"
+import (
+	"github.com/riyan-eng/boilerplate3/internal/datastruct"
+	srv "github.com/riyan-eng/boilerplate3/pkg"
+)
 
 type TaskCreateReq struct {
 	ID     string
@@ -10,4 +13,18 @@ type TaskCreateReq struct {
 
 type TaskCreateRes struct {
 	Data srv.CreateTaskRes
+}
+
+type TaskListReq struct {
+	Search string
+	Limit  uint32
+	Page   uint32
+	Order  string
+}
+
+type TaskListRes struct {
+	Items []datastruct.Task
+	Page  uint32
+	Limit uint32
+	Total uint32
 }
