@@ -39,7 +39,7 @@ func (t *taskService) ListTask(req dto.TaskListReq) (res dto.TaskListRes) {
 	util.PanicIfNeeded(err)
 	res.Page = pageMeta.Page
 	res.Limit = pageMeta.Page
-	if res.Items[0].Total > 1 {
+	if len(res.Items) > 0 {
 		res.Total = res.Items[0].Total
 	}
 	return

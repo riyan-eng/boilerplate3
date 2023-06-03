@@ -21,8 +21,8 @@ type taskQuery struct {
 }
 
 func (u *taskQuery) ListTask(r serrepconnector.ListTaskReq) *sql.Rows {
-	query := fmt.Sprintf(`select id, name, detail from public.tasks 
-		where lower(name) like '%%%v%%' order by created_at %v limit %v offset %v`,
+	query := fmt.Sprintf(`select id, name, detail, count(*) over() as total from public.tasks 
+		where lower(name) like lower('%%%v%%') order by created_at %v limit %v offset %v`,
 		r.Search, r.Order, r.Limit, r.Offset)
 	rows, err := u.db.Query(query)
 	util.PanicIfNeeded(err)
