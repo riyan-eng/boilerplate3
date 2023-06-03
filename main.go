@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/swagger"
+	"github.com/riyan-eng/boilerplate3/config"
 	"github.com/riyan-eng/boilerplate3/internal/repository"
 	"github.com/riyan-eng/boilerplate3/internal/route"
 	"github.com/riyan-eng/boilerplate3/internal/service"
@@ -44,14 +45,9 @@ func main() {
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 	// fiber
-	fiberApp := fiber.New()
-	fiberApp.Use(cors.New(cors.Config{
-		AllowOrigins: "http://127.0.0.1:3000, https://gofiber.net",
-		AllowHeaders: "Origin, Content-Type, Accept",
-	}))
-	fiberApp.Get("/docs/*", swagger.New(swagger.Config{
-		Title: "BP3",
-	}))
+	fiberApp := fiber.New(config.NewFiberConfig())
+	fiberApp.Use(cors.New(config.NewCorsConfig()))
+	fiberApp.Get("/docs/*", swagger.New(config.NewSwaggerConfig()))
 	route.NewRoute(fiberApp, taskService)
 	fiberApp.Listen(":3000")
 }

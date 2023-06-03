@@ -1,3 +1,5 @@
+.PHONY: docs build
+
 dev:
 	go run main.go
 
