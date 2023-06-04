@@ -16,6 +16,32 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/auth/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pkg.AuthLoginReq"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/auth/register": {
             "post": {
                 "consumes": [
@@ -183,6 +209,17 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "pkg.AuthLoginReq": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
         "pkg.AuthRegisterReq": {
             "type": "object",
             "properties": {

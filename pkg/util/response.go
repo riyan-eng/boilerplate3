@@ -30,4 +30,6 @@ const (
 	MESSAGE_UNAUTHORIZED  = "Unauthorized."
 	MESSAGE_CONFLICT      = "Data sudah ada."
 	MESSAGE_NOT_FOUND     = "Data tidak ada."
+	MESSAGE_FAILED_LOGIN  = "Username atau password tidak cocok."
+	MESSAGE_OK_LOGIN      = "Berhasil masuk."
 )

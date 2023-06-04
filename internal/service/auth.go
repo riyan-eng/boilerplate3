@@ -1,6 +1,9 @@
 package service
 
 import (
+	"database/sql"
+
+	"github.com/blockloop/scan/v2"
 	"github.com/riyan-eng/boilerplate3/internal/dto"
 	"github.com/riyan-eng/boilerplate3/internal/repository"
 	"github.com/riyan-eng/boilerplate3/internal/serrepconnector"
@@ -9,7 +12,7 @@ import (
 )
 
 type AuthService interface {
-	Login()
+	Login(dto.AuthLoginReq) dto.AuthLoginRes
 	Register(dto.AuthRegisterReq) dto.AuthRegisterRes
 	RefreshToken()
 	ResetPassword()
@@ -25,7 +28,27 @@ func NewAuthService(dao repository.DAO) AuthService {
 	}
 }
 
-func (a *authService) Login() {
+func (a *authService) Login(req dto.AuthLoginReq) (res dto.AuthLoginRes) {
+	sqlrows := a.dao.NewAuthQuery().Login(serrepconnector.AuthLoginReq{
+		Username: req.Username,
+	})
+	err := scan.Row(&res.Data, sqlrows)
+	if err == sql.ErrNoRows {
+		return
+	} else {
+		util.PanicIfNeeded(err)
+	}
+
+	ok := util.VerifyHash(res.Data.Password, req.Password)
+	if ok {
+		res.Match = true
+		genJwt := util.GenerateJwt(res.Data.UserID, res.Data.RoleCode, "issuer")
+		res.AccessToken = genJwt.AccessToken
+		res.RefreshToken = genJwt.RefreshToken
+		res.ExpiredAt = genJwt.ExpiredAt
+		return
+	}
+	return
 }
 
 func (a *authService) Register(req dto.AuthRegisterReq) (res dto.AuthRegisterRes) {

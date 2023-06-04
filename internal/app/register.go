@@ -21,7 +21,7 @@ func (s *ServiceServer) Register(c *fiber.Ctx) error {
 	util.PanicIfNeeded(err)
 	validation.ValidateAuthRegister(*body)
 
-	s.authService.Register(dto.AuthRegisterReq{
+	service := s.authService.Register(dto.AuthRegisterReq{
 		UserID:     uuid.NewString(),
 		UserDataID: uuid.NewString(),
 		Username:   body.Username,
@@ -34,6 +34,7 @@ func (s *ServiceServer) Register(c *fiber.Ctx) error {
 		Phone:      body.Phone,
 	})
 	return c.JSON(util.Response{
+		Data:    service.Data,
 		Message: util.MESSAGE_OK_CREATE,
 	})
 }

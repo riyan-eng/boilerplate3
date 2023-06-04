@@ -27,13 +27,13 @@ type tokenResult struct {
 	uid   string
 }
 
-type jwtResult struct {
-	accessToken  string
-	refreshToken string
-	expired_at   *jwt.NumericDate
+type JwtResult struct {
+	AccessToken  string
+	RefreshToken string
+	ExpiredAt    *jwt.NumericDate
 }
 
-func GenerateJwt(userID, roleCode, issuer string) jwtResult {
+func GenerateJwt(userID, roleCode, issuer string) JwtResult {
 	access := createToken(userID, roleCode, issuer, "secretAccess", 1)
 	refresh := createToken(userID, roleCode, issuer, "secretRefresh", 6)
 	cachedJson, err := json.Marshal(CachedToken{
@@ -42,10 +42,10 @@ func GenerateJwt(userID, roleCode, issuer string) jwtResult {
 	})
 	PanicIfNeeded(err)
 	fmt.Println(cachedJson)
-	return jwtResult{
-		accessToken:  access.token,
-		refreshToken: refresh.token,
-		expired_at:   access.expat,
+	return JwtResult{
+		AccessToken:  access.token,
+		RefreshToken: refresh.token,
+		ExpiredAt:    access.expat,
 	}
 }
 
@@ -64,7 +64,8 @@ func createToken(userID, roleCode, issuer, secret string, expHour int16) tokenRe
 		},
 	}
 	mySigningKey := []byte(secret)
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	ss, err := token.SignedString(mySigningKey)
 	PanicIfNeeded(err)
 	return tokenResult{

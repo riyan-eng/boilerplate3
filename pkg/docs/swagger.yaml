@@ -1,4 +1,11 @@
 definitions:
+  pkg.AuthLoginReq:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
   pkg.AuthRegisterReq:
     properties:
       address:
@@ -35,6 +42,23 @@ definitions:
 info:
   contact: {}
 paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.AuthLoginReq'
+      produces:
+      - application/json
+      responses: {}
+      summary: Login
+      tags:
+      - Authentication
   /auth/register:
     post:
       consumes:

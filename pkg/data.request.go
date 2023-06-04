@@ -34,3 +34,8 @@ type AuthRegisterReq struct {
 	Address  string `json:"address"`
 	Phone    string `json:"phone"`
 }
+
+type AuthLoginReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}

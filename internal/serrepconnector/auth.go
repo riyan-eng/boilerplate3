@@ -12,3 +12,7 @@ type AuthRegisterReq struct {
 	RoleCode   string
 	Phone      string
 }
+
+type AuthLoginReq struct {
+	Username string
+}

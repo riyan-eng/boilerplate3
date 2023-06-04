@@ -19,3 +19,15 @@ func ValidateAuthRegister(request srv.AuthRegisterReq) {
 		})
 	}
 }
+
+func ValidateAuthLogin(request srv.AuthLoginReq) {
+	err := validation.ValidateStruct(&request,
+		validation.Field(&request.Username, validation.Required),
+		validation.Field(&request.Password, validation.Required),
+	)
+	if err != nil {
+		panic(util.ValidationError{
+			Message: err.Error(),
+		})
+	}
+}
