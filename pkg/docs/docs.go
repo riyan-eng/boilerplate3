@@ -35,7 +35,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pkg.AuthRegister"
+                            "$ref": "#/definitions/pkg.AuthRegisterReq"
                         }
                     }
                 ],
@@ -183,7 +183,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "pkg.AuthRegister": {
+        "pkg.AuthRegisterReq": {
             "type": "object",
             "properties": {
                 "address": {
@@ -199,6 +199,12 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "role_code": {
                     "type": "string"
                 },
                 "username": {

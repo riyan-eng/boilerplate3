@@ -24,11 +24,13 @@ type TaskUpdateReq struct {
 	Detail string `json:"detail"`
 }
 
-type AuthRegister struct {
-	UserName string `json:"username"`
+type AuthRegisterReq struct {
+	Username string `json:"username"`
 	Email    string `json:"email"`
+	RoleCode string `json:"role_code"`
 	Password string `json:"password"`
 	Name     string `json:"name"`
 	Gender   string `json:"gender"`
 	Address  string `json:"address"`
+	Phone    string `json:"phone"`
 }

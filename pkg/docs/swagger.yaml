@@ -1,5 +1,5 @@
 definitions:
-  pkg.AuthRegister:
+  pkg.AuthRegisterReq:
     properties:
       address:
         type: string
@@ -10,6 +10,10 @@ definitions:
       name:
         type: string
       password:
+        type: string
+      phone:
+        type: string
+      role_code:
         type: string
       username:
         type: string
@@ -41,7 +45,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/pkg.AuthRegister'
+          $ref: '#/definitions/pkg.AuthRegisterReq'
       produces:
       - application/json
       responses: {}
