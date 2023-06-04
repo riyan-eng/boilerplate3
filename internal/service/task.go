@@ -12,7 +12,7 @@ import (
 type TaskService interface {
 	ListTask(dto.TaskListReq) dto.TaskListRes
 	CreateTask(dto.TaskCreateReq) dto.TaskCreateRes
-	DeleteTask()
+	DeleteTask(dto.TaskDeleteReq)
 	DetailTask(dto.TaskDetailReq) dto.TaskDetailRes
 	UpdateTask()
 }
@@ -59,7 +59,10 @@ func (t *taskService) CreateTask(req dto.TaskCreateReq) (res dto.TaskCreateRes) 
 	return
 }
 
-func (t *taskService) DeleteTask() {
+func (t *taskService) DeleteTask(req dto.TaskDeleteReq) {
+	t.dao.NewTaskQuery().DeleteTask(serrepconnector.TaskDeleteReq{
+		ID: req.ID,
+	})
 }
 
 func (t *taskService) DetailTask(req dto.TaskDetailReq) (res dto.TaskDetailRes) {

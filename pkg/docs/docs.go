@@ -23,9 +23,6 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -63,15 +60,16 @@ const docTemplate = `{
                 "responses": {}
             },
             "post": {
-                "description": "create string by ID",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Add a new pet to the store",
-                "operationId": "create-string-by-int",
+                "tags": [
+                    "Akun"
+                ],
+                "summary": "Create akun",
                 "parameters": [
                     {
                         "description": "body",
@@ -95,6 +93,25 @@ const docTemplate = `{
                     "Akun"
                 ],
                 "summary": "Detail akun",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Akun"
+                ],
+                "summary": "Delete akun",
                 "parameters": [
                     {
                         "type": "string",

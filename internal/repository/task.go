@@ -11,7 +11,7 @@ import (
 type TaskQuery interface {
 	ListTask(serrepconnector.TaskListReq) *sql.Rows
 	CreateTask(serrepconnector.TaskCreateReq)
-	DeleteTask()
+	DeleteTask(serrepconnector.TaskDeleteReq)
 	DetailTask(serrepconnector.TaskDetailReq) *sql.Rows
 	UpdateTask()
 }
@@ -37,7 +37,12 @@ func (u *taskQuery) CreateTask(req serrepconnector.TaskCreateReq) {
 	util.PanicIfNeeded(err)
 }
 
-func (u *taskQuery) DeleteTask() {
+func (u *taskQuery) DeleteTask(req serrepconnector.TaskDeleteReq) {
+	query := fmt.Sprintf(`
+		delete from public.tasks where id = '%v'
+	`, req.ID)
+	_, err := u.db.Exec(query)
+	util.PanicIfNeeded(err)
 }
 
 func (u *taskQuery) DetailTask(req serrepconnector.TaskDetailReq) *sql.Rows {

@@ -36,3 +36,7 @@ type TaskDetailReq struct {
 type TaskDetailRes struct {
 	Item datastruct.Task
 }
+
+type TaskDeleteReq struct {
+	ID string
+}

@@ -11,8 +11,6 @@ info:
 paths:
   /task:
     get:
-      consumes:
-      - application/json
       parameters:
       - default: desc
         description: desc/asc default(desc)
@@ -42,8 +40,6 @@ paths:
     post:
       consumes:
       - application/json
-      description: create string by ID
-      operationId: create-string-by-int
       parameters:
       - description: body
         in: body
@@ -54,8 +50,23 @@ paths:
       produces:
       - application/json
       responses: {}
-      summary: Add a new pet to the store
+      summary: Create akun
+      tags:
+      - Akun
   /task/{id}:
+    delete:
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete akun
+      tags:
+      - Akun
     get:
       parameters:
       - description: id

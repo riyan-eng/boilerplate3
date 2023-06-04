@@ -21,3 +21,7 @@ type TaskListRes struct{}
 type TaskDetailReq struct {
 	ID string
 }
+
+type TaskDeleteReq struct {
+	ID string
+}

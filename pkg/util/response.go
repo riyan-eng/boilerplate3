@@ -14,7 +14,7 @@ type Meta struct {
 
 const (
 	MESSAGE_OK_CREATE     = "Berhasil memasukkan data."
-	MESSAGE_OK_DELETE     = "Berhasul menghapus data."
+	MESSAGE_OK_DELETE     = "Berhasil menghapus data."
 	MESSAGE_OK_UPDATE     = "Berhasil memperbaharui data."
 	MESSAGE_OK_READ       = "Berhasil menampilkan data."
 	MESSAGE_OK_IMPORT     = "Berhasil mengimport data."

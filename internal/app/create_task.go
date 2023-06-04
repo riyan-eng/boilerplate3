@@ -9,9 +9,8 @@ import (
 	"github.com/riyan-eng/boilerplate3/pkg/validation"
 )
 
-// @Summary		Add a new pet to the store
-// @Description	create string by ID
-// @ID			create-string-by-int
+// @Summary     Create akun
+// @Tags       	Akun
 // @Accept		json
 // @Produce		json
 // @Param       body	body  srv.TaskCreateReq	true  "body"

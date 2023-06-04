@@ -9,7 +9,6 @@ import (
 
 // @Summary      List akun
 // @Tags       	 Akun
-// @Accept       json
 // @Produce      json
 // @Param        order		query   string	false  "desc/asc default(desc)"
 // @Param        search		query   string	false  "search"
