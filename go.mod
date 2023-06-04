@@ -11,6 +11,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/lib/pq v1.10.9
 	github.com/swaggo/swag v1.16.1
+	golang.org/x/crypto v0.7.0
 )
 
 require (

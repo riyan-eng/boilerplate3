@@ -1,4 +1,19 @@
 definitions:
+  pkg.AuthRegister:
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      gender:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
   pkg.TaskCreateReq:
     properties:
       detail:
@@ -16,6 +31,23 @@ definitions:
 info:
   contact: {}
 paths:
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.AuthRegister'
+      produces:
+      - application/json
+      responses: {}
+      summary: Register
+      tags:
+      - Authentication
   /task:
     get:
       parameters:

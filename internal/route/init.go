@@ -13,4 +13,5 @@ func NewRoute(
 ) {
 	allHandler := app.NewService(taskService, authService)
 	TaskRoute(fiberApp, allHandler)
+	AuthRoute(fiberApp, allHandler)
 }
