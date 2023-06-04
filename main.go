@@ -40,6 +40,7 @@ func main() {
 	// register service
 	dao := repository.NewDAO(db)
 	taskService := service.NewTaskService(dao)
+	authService := service.NewAuthService(dao)
 
 	// swagger
 	docs.SwaggerInfo.Title = "Boilerplate 3"
@@ -52,6 +53,6 @@ func main() {
 	fiberApp.Use(recover.New())
 	fiberApp.Get("/metrics", monitor.New())
 	fiberApp.Get("/docs/*", swagger.New(config.NewSwaggerConfig()))
-	route.NewRoute(fiberApp, taskService)
+	route.NewRoute(fiberApp, taskService, authService)
 	fiberApp.Listen(":3000")
 }
