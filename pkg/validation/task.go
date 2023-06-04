@@ -6,7 +6,7 @@ import (
 	"github.com/riyan-eng/boilerplate3/pkg/util"
 )
 
-func ValidateCreateTask(request srv.CreateTaskReq) {
+func ValidateCreateTask(request srv.TaskCreateReq) {
 	err := validation.ValidateStruct(&request,
 		validation.Field(&request.Name, validation.Required),
 		validation.Field(&request.Detail, validation.Required),

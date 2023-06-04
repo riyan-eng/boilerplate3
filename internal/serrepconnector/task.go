@@ -1,19 +1,23 @@
 package serrepconnector
 
-type CreateTaskReq struct {
+type TaskCreateReq struct {
 	UserID string
 	ID     string
 	Name   string
 	Detail string
 }
 
-type CreateTaskRes struct{}
+type TaskCreateRes struct{}
 
-type ListTaskReq struct {
+type TaskListReq struct {
 	Search string
 	Limit  uint32
 	Offset uint32
 	Order  string
 }
 
-type ListTaskRes struct{}
+type TaskListRes struct{}
+
+type TaskDetailReq struct {
+	ID string
+}

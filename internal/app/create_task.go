@@ -14,10 +14,10 @@ import (
 // @ID			create-string-by-int
 // @Accept		json
 // @Produce		json
-// @Param       body	body  srv.CreateTaskReq	true  "body"
+// @Param       body	body  srv.TaskCreateReq	true  "body"
 // @Router		/task [post]
 func (s *ServiceServer) CreateTask(c *fiber.Ctx) error {
-	body := new(srv.CreateTaskReq)
+	body := new(srv.TaskCreateReq)
 	err := c.BodyParser(&body)
 	util.PanicIfNeeded(err)
 	validation.ValidateCreateTask(*body)

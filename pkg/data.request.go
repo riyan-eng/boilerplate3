@@ -1,6 +1,6 @@
 package pkg
 
-type CreateTaskReq struct {
+type TaskCreateReq struct {
 	Name   string `json:"name"`
 	Detail string `json:"detail"`
 }

@@ -79,8 +79,29 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pkg.CreateTaskReq"
+                            "$ref": "#/definitions/pkg.TaskCreateReq"
                         }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/task/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Akun"
+                ],
+                "summary": "Detail akun",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {}
@@ -88,7 +109,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "pkg.CreateTaskReq": {
+        "pkg.TaskCreateReq": {
             "type": "object",
             "properties": {
                 "detail": {

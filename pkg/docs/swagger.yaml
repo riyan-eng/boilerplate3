@@ -1,5 +1,5 @@
 definitions:
-  pkg.CreateTaskReq:
+  pkg.TaskCreateReq:
     properties:
       detail:
         type: string
@@ -50,9 +50,23 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/pkg.CreateTaskReq'
+          $ref: '#/definitions/pkg.TaskCreateReq'
       produces:
       - application/json
       responses: {}
       summary: Add a new pet to the store
+  /task/{id}:
+    get:
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Detail akun
+      tags:
+      - Akun
 swagger: "2.0"

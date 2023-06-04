@@ -28,3 +28,11 @@ type TaskListRes struct {
 	Limit uint32
 	Total uint32
 }
+
+type TaskDetailReq struct {
+	ID string
+}
+
+type TaskDetailRes struct {
+	Item datastruct.Task
+}
