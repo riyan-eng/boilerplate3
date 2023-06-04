@@ -8,6 +8,7 @@ import (
 
 type DAO interface {
 	NewTaskQuery() TaskQuery
+	NewAuthQuery() AuthQuery
 }
 
 type dao struct{}
@@ -31,6 +32,12 @@ func NewDB() (*sql.DB, error) {
 
 func (d *dao) NewTaskQuery() TaskQuery {
 	return &taskQuery{
+		db: DB,
+	}
+}
+
+func (d *dao) NewAuthQuery() AuthQuery {
+	return &authQuery{
 		db: DB,
 	}
 }
