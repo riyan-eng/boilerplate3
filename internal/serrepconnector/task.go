@@ -1,7 +1,6 @@
 package serrepconnector
 
 type TaskCreateReq struct {
-	UserID string
 	ID     string
 	Name   string
 	Detail string
@@ -24,4 +23,10 @@ type TaskDetailReq struct {
 
 type TaskDeleteReq struct {
 	ID string
+}
+
+type TaskUpdateReq struct {
+	ID     string
+	Name   string
+	Detail string
 }

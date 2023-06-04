@@ -110,11 +110,53 @@
                     }
                 ],
                 "responses": {}
+            },
+            "patch": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Akun"
+                ],
+                "summary": "Update akun",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pkg.TaskUpdateReq"
+                        }
+                    }
+                ],
+                "responses": {}
             }
         }
     },
     "definitions": {
         "pkg.TaskCreateReq": {
+            "type": "object",
+            "properties": {
+                "detail": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.TaskUpdateReq": {
             "type": "object",
             "properties": {
                 "detail": {

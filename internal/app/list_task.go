@@ -17,7 +17,7 @@ import (
 // @Router       /task [get]
 // @Security ApiKeyAuth
 func (s *ServiceServer) ListTask(c *fiber.Ctx) error {
-	queryParam := new(srv.ListTaskReq).Init()
+	queryParam := new(srv.TaskListReq).Init()
 	err := c.QueryParser(&queryParam)
 	util.PanicIfNeeded(err)
 

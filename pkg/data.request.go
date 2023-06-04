@@ -5,16 +5,21 @@ type TaskCreateReq struct {
 	Detail string `json:"detail"`
 }
 
-type ListTaskReq struct {
+type TaskListReq struct {
 	Page   uint32 `query:"page" default:"1"`
 	Limit  uint32 `query:"limit" default:"10"`
 	Search string `query:"search" default:"mamby"`
 	Order  string `query:"order"`
 }
 
-func (l ListTaskReq) Init() ListTaskReq {
+func (l TaskListReq) Init() TaskListReq {
 	l.Page = 1
 	l.Limit = 10
 	l.Order = "desc"
 	return l
+}
+
+type TaskUpdateReq struct {
+	Name   string `json:"name"`
+	Detail string `json:"detail"`
 }

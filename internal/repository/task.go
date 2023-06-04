@@ -13,7 +13,7 @@ type TaskQuery interface {
 	CreateTask(serrepconnector.TaskCreateReq)
 	DeleteTask(serrepconnector.TaskDeleteReq)
 	DetailTask(serrepconnector.TaskDetailReq) *sql.Rows
-	UpdateTask()
+	UpdateTask(serrepconnector.TaskUpdateReq)
 }
 
 type taskQuery struct {
@@ -54,5 +54,10 @@ func (u *taskQuery) DetailTask(req serrepconnector.TaskDetailReq) *sql.Rows {
 	return rows
 }
 
-func (u *taskQuery) UpdateTask() {
+func (u *taskQuery) UpdateTask(req serrepconnector.TaskUpdateReq) {
+	query := fmt.Sprintf(`
+		update public.tasks set name = '%v', detail = '%v', updated_at = current_timestamp where id = '%v' 
+	`, req.Name, req.Detail, req.ID)
+	_, err := u.db.Exec(query)
+	util.PanicIfNeeded(err)
 }

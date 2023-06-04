@@ -14,7 +14,7 @@ type TaskService interface {
 	CreateTask(dto.TaskCreateReq) dto.TaskCreateRes
 	DeleteTask(dto.TaskDeleteReq)
 	DetailTask(dto.TaskDetailReq) dto.TaskDetailRes
-	UpdateTask()
+	UpdateTask(dto.TaskUpdateReq)
 }
 
 type taskService struct {
@@ -38,7 +38,7 @@ func (t *taskService) ListTask(req dto.TaskListReq) (res dto.TaskListRes) {
 	err := scan.Rows(&res.Items, sqlrows)
 	util.PanicIfNeeded(err)
 	res.Page = pageMeta.Page
-	res.Limit = pageMeta.Page
+	res.Limit = pageMeta.Limit
 	if len(res.Items) > 0 {
 		res.Total = res.Items[0].Total
 	}
@@ -51,7 +51,7 @@ func (t *taskService) CreateTask(req dto.TaskCreateReq) (res dto.TaskCreateRes) 
 		Name:   req.Name,
 		Detail: req.Detail,
 	})
-	res.Data = srv.CreateTaskRes{
+	res.Data = srv.TaskCreateRes{
 		ID:     req.ID,
 		Name:   req.Name,
 		Detail: req.Detail,
@@ -74,5 +74,10 @@ func (t *taskService) DetailTask(req dto.TaskDetailReq) (res dto.TaskDetailRes) 
 	return
 }
 
-func (t *taskService) UpdateTask() {
+func (t *taskService) UpdateTask(req dto.TaskUpdateReq) {
+	t.dao.NewTaskQuery().UpdateTask(serrepconnector.TaskUpdateReq{
+		ID:     req.ID,
+		Name:   req.Name,
+		Detail: req.Detail,
+	})
 }

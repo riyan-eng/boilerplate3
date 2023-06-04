@@ -12,7 +12,7 @@ type TaskCreateReq struct {
 }
 
 type TaskCreateRes struct {
-	Data srv.CreateTaskRes
+	Data srv.TaskCreateRes
 }
 
 type TaskListReq struct {
@@ -39,4 +39,10 @@ type TaskDetailRes struct {
 
 type TaskDeleteReq struct {
 	ID string
+}
+
+type TaskUpdateReq struct {
+	ID     string
+	Name   string
+	Detail string
 }

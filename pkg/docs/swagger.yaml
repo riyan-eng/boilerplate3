@@ -6,6 +6,13 @@ definitions:
       name:
         type: string
     type: object
+  pkg.TaskUpdateReq:
+    properties:
+      detail:
+        type: string
+      name:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
@@ -78,6 +85,27 @@ paths:
       - application/json
       responses: {}
       summary: Detail akun
+      tags:
+      - Akun
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.TaskUpdateReq'
+      produces:
+      - application/json
+      responses: {}
+      summary: Update akun
       tags:
       - Akun
 swagger: "2.0"

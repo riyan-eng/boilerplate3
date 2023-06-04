@@ -17,3 +17,14 @@ func ValidateCreateTask(request srv.TaskCreateReq) {
 		})
 	}
 }
+
+func ValidateUpdateTask(request srv.TaskUpdateReq) {
+	err := validation.ValidateStruct(&request,
+		validation.Field(&request.Name, validation.Required),
+	)
+	if err != nil {
+		panic(util.ValidationError{
+			Message: err.Error(),
+		})
+	}
+}
