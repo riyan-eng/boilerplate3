@@ -1,12 +1,14 @@
 package util
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
+	"github.com/riyan-eng/boilerplate3/infrastructure"
 )
 
 type CachedToken struct {
@@ -34,14 +36,18 @@ type JwtResult struct {
 }
 
 func GenerateJwt(userID, roleCode, issuer string) JwtResult {
-	access := createToken(userID, roleCode, issuer, "secretAccess", 1)
-	refresh := createToken(userID, roleCode, issuer, "secretRefresh", 6)
+	autoLogoffMinutes := 45
+	var accessExpInHour int16 = 1
+	var refreshExpInHour int16 = 6
+	access := createToken(userID, roleCode, issuer, "secretAccess", accessExpInHour)
+	refresh := createToken(userID, roleCode, issuer, "secretRefresh", refreshExpInHour)
 	cachedJson, err := json.Marshal(CachedToken{
 		AccessUID:  access.uid,
 		RefreshUID: refresh.uid,
 	})
 	PanicIfNeeded(err)
-	fmt.Println(cachedJson)
+	ctx := context.Background()
+	infrastructure.Redis.Set(ctx, fmt.Sprintf("token-%s", userID), string(cachedJson), time.Minute*time.Duration(autoLogoffMinutes))
 	return JwtResult{
 		AccessToken:  access.token,
 		RefreshToken: refresh.token,

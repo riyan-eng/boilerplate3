@@ -10,6 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
 	"github.com/riyan-eng/boilerplate3/config"
+	"github.com/riyan-eng/boilerplate3/infrastructure"
 	"github.com/riyan-eng/boilerplate3/internal/repository"
 	"github.com/riyan-eng/boilerplate3/internal/route"
 	"github.com/riyan-eng/boilerplate3/internal/service"
@@ -23,18 +24,20 @@ func init() {
 	} else {
 		runtime.GOMAXPROCS(numCPU / 2)
 	}
+
+	infrastructure.ConnRedis()
 }
 
 func main() {
 	// database
 	db, err := repository.NewDB()
 	if err != nil {
-		log.Printf("cannot connect database: %v", err)
+		log.Printf("dbpostgre: cannot connect database: %v", err)
 		return
 	}
 	err = db.Ping()
 	if err != nil {
-		log.Fatalf("cannot ping database: %v", err)
+		log.Fatalf("dbpostgre: cannot ping database: %v", err)
 	}
 
 	// register service
